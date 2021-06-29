@@ -1,0 +1,62 @@
+ls -l (listar directorios y su cantidad)
+docker --version
+git version
+// -t es el tag(etiqueta)
+//{username}/{repo}:{tag}
+docker image build -t mijailstell/gsd:first-container --no-cache .
+	or
+	//descargar (pull)
+	docker pull	mijailstell/gsd:first-container
+//subir (push) a docker hub
+docker push	mijailstell/gsd:first-container	
+
+docker image ls
+docker container ls
+//Ejecutar (-d es para ejecutar en 2do plano)
+docker container run -d --name web -p 3000:8080 mijailstell/gsd:first-container	
+-------------------Desde git
+git clone url
+--ubicarse en la raiz del dockerfile y generamos una imagen en base al dockerfil
+docker image build -t mijailstell/gsd:first-container .
+--subimos la imagen para compartirla
+docker push	mijailstell/gsd:first-container
+--ejecutamos la imagen
+docker container run -d --name web -p 3000:8080 mijailstell/gsd:first-container	
+
+--listar todos los contenedor
+docker container ls -a
+--detener contenedor
+docker container stop web
+--iniciar contenedor
+docker container start web
+--eliminar contenedor
+	docker container stop web
+	docker container rm web
+		or
+	docker container rm web -f
+
+--Ejecutar en primer plano
+docker container run -it --name test alpine sh
+--para salir: Ctrl + P +Q
+
+---------------swarm
+docker swarm init --advertise-addr=IP
+docker service create --name web -p 8080:8080 --replicas 3 mijailstell/gsd:first-container
+docker service ls
+docker service ps web
+
+--los pasos de crear una imagen y luego ejeutar el docker-compose y poner un nombre (counter)
+docker stack deploy -c docker-compose.yml counter
+docker stack ls
+--ver los servicios de counter
+docker stack services counter
+docker stack ps counter
+
+--Si se desea modificar el yml
+vim docker-compose.yml (luego enter)
+--tecla "insert" para modficar
+--tecla:  :(dos puntos)wq (enter) Para guardar
+docker stack deploy -c docker-compose.yml counter
+
+--Finalmente destruir todos
+docker stack rm counter
