@@ -60,3 +60,13 @@ docker stack deploy -c docker-compose.yml counter
 
 --Finalmente destruir todos
 docker stack rm counter
+
+
+--Generar llave (enter a todo)
+ssh-keygen -f remote-key
+
+-- ingresar al contenedor para realizar comandos
+docker exec -ti jenkins bash
+
+--Si actualizo el docker-compose
+docker-compose build
