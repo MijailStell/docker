@@ -5,9 +5,9 @@ services:
         container_name: jenkins
         image: jenkins/jenkins
         ports:
-            - "8080:8080"
+            - "9090:8080"
         volumes:
-            - $PWD/jenkins_home:/var/jenkins_home
+            - ./jenkins_home:/var/run/docker.sock
         networks:
             - net
     centos:
